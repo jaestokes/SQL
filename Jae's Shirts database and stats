@@ -1,0 +1,49 @@
+Create a clothing store database
+
+/** Jaes_Shirts
+1 "red shirts" (25, "L", 10)
+2 "orange shirts" (25, "L", 10)
+3 "yellow shirts" (25, "M", 5)
+4 "green shirts" (25, "S", 5)
+5 "blue shirts" (25, "S", 10)
+6 "indigo shirts" (25, "M", 15)
+7 "violet shirts" (45, "XXL", 5)
+8 "black shirts" (75, "S", 20)
+9 "white shirts" (75, "L", 25)
+10 "striped shirts" (50, "M", 15)
+11 "polka dot shirts" (50, "L", 15)
+12 "animal print shirts" (30, "XL", 15)
+13 "collared shirts" (60, "L", 20)
+14 "v neck shirts" (65, "L", 20)
+15 "hoodies" (100, XXL, 45)
+**/
+
+CREATE TABLE Jaes_Shirts (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, size TEXT, price INTEGER);
+
+INSERT INTO Jaes_Shirts VALUES (1, "red shirts", 25, "L", 10);
+INSERT INTO Jaes_Shirts VALUES (2, "orange shirts", 25, "L", 10);
+INSERT INTO Jaes_Shirts VALUES (3, "yellow shirts", 25, "M", 5);
+INSERT INTO Jaes_shirts Values (4, "green shirts", 25, "S", 5);
+INSERT INTO Jaes_Shirts VALUES (5, "blue shirts", 25, "S", 10);
+INSERT INTO Jaes_Shirts VALUES (6, "indigo shirts", 25, "M", 15);
+INSERT INTO Jaes_Shirts VALUES (7, "violet shirts", 45, "XXL", 5);
+INSERT INTO Jaes_Shirts VALUES (8, "black shirts", 75, "S", 20);
+INSERT INTO Jaes_Shirts VALUES (9, "white shirts", 75, "L", 25);
+INSERT INTO Jaes_Shirts VALUES (10, "striped shirts", 50, "M", 15);
+INSERT INTO Jaes_Shirts VALUES (11, "polka dot shirts", 50, "L", 15);
+INSERT INTO Jaes_Shirts VALUES (12, "animal print shirts", 30, "XL", 15);
+INSERT INTO Jaes_Shirts VALUES (13, "collared shirts", 60,"L", 20);
+INSERT INTO Jaes_Shirts VALUES (14, "v neck shirts", 65, "L", 20);
+INSERT INTO Jaes_Shirts VALUES (15, "hoodies", 100,"XXL", 45);
+
+--display the database ordered by size.
+SELECT * FROM Jaes_Shirts
+GROUP BY size;
+
+--display the database ordered by quantity.
+SELECT SUM(quantity) FROM Jaes_Shirts;
+
+--display the database ordered by price. 
+SELECT * FROM store
+ORDER BY price desc; 
+
