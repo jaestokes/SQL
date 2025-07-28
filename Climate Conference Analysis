@@ -1,0 +1,101 @@
+Climate Conference Project
+https://www.db-fiddle.com/f/pxMci1sLL945KHKYvpe9W6/1
+
+
+#LEFT JOIN This query retrieves all VIP members along with their reservation details, including those who do not have reservations:
+SELECT 
+    v.first_name, 
+    v.last_name, 
+    r.hotel, 
+    r.welcome_rsvp, 
+    r.dinner_rsvp
+FROM 
+    vips v
+LEFT JOIN 
+    reservations r ON v.member_id = r.member_id;
+
+#INNER JOIN This query retrieves the names of VIPs who have made reservations, along with the hotel they are staying at:
+SELECT 
+    v.first_name, 
+    v.last_name, 
+    h.hotel_name
+FROM 
+    vips v
+INNER JOIN 
+    reservations r ON v.member_id = r.member_id
+INNER JOIN 
+    hotels h ON r.hotel = h.hotel_id;
+
+#MULTIPLE JOINS This query retrieves the names of VIPs, their associated event details, and the hotel they are staying at:
+SELECT 
+    v.first_name, 
+    v.last_name, 
+    e.event_name, 
+    h.hotel_name
+FROM 
+    vips v
+INNER JOIN 
+    reservations r ON v.member_id = r.member_id
+INNER JOIN 
+    events e ON v.event = e.event_id
+INNER JOIN 
+    hotels h ON r.hotel = h.hotel_id;
+
+#QUERY W/ SUBQUERY This query lists the names of VIPs who have made reservations at the hotel that has the maximum number of reservations:
+SELECT 
+    first_name, 
+    last_name
+FROM 
+    vips
+WHERE 
+    member_id IN (
+        SELECT 
+            member_id 
+        FROM 
+            reservations 
+        WHERE 
+            hotel = (
+                SELECT 
+                    hotel
+                FROM 
+                    reservations 
+                GROUP BY 
+                    hotel 
+                ORDER BY 
+                    COUNT(*) DESC 
+                LIMIT 1
+            )
+    );
+
+#SELF JOIN This query retrieves pairs of VIP members who belong to the same association:
+SELECT 
+    v1.first_name AS Member1, 
+    v1.last_name AS LastName1,
+    v2.first_name AS Member2, 
+    v2.last_name AS LastName2
+FROM 
+    vips v1
+INNER JOIN 
+    v
+
+#This query retrieves a list of events along with the count of VIP members attending each event. It uses an INNER JOIN to connect the vips and events tables through the event field in the vips table.
+SELECT 
+    e.event_name,
+    COUNT(v.member_id) AS NumberOfAttendees
+FROM 
+    events e
+
+#This query retrieves the names of VIP members who have not made any reservations. It uses a LEFT JOIN and filters for records where the reservation information is NULL.
+SELECT 
+    v.first_name, 
+    v.last_name
+FROM 
+    vips v
+LEFT JOIN 
+    reservations r ON v.member_id = r.member_id
+WHERE 
+    r.member_id IS NULL;
+LEFT JOIN 
+    vips v ON e.event_id = v.event
+GROUP BY 
+    e.event_name;
